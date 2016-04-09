@@ -2,9 +2,9 @@
 
 ###Integrantes:
 
-# - Rafael Pina
+#### - Rafael Pina
 
-# - Argenis Jesus
+#### - Argenis Jesus
 
 
 ##Como correrlo:
