@@ -26,10 +26,15 @@ productmv <- function(M, V, N, memsize,typemult,columna) {
   ###############MAPREDUCE PROCESS
   
   skipear <- 0
-  A3 <- read.csv(M, header = FALSE,nrows=1)  
+  A3 <- read.csv(M, header = FALSE,nrows=1)
+  Av3 <- read.csv(V, header = FALSE,nrows = 1)
+  size_by_lineV <-object.size(Av3)
   size_by_line3 <- object.size(A3)
+  memtotal<-size_by_lineV+size_by_line3
   cant_elems <- memsize %/% size_by_line3 
   
+  
+  if(cant_elems>0&&memtotal<memsize){
   if (file.exists(file)) file.remove(file)
   
   while(N*N > skipear){
@@ -37,8 +42,6 @@ productmv <- function(M, V, N, memsize,typemult,columna) {
     i <- A3[1]
     A3 <-to.dfs(A3)
     calc <- mapreduce(input=A3, 
-                    #output=output, 
-                    #input.format="text", 
                     map=map, 
                     reduce=reduce,
                     verbose = FALSE)
@@ -82,7 +85,9 @@ productmv <- function(M, V, N, memsize,typemult,columna) {
     
     
   }
-
+  }else{
+  print("No hay memoria disponible para realizar una operacion!")
+}
 
 }
 

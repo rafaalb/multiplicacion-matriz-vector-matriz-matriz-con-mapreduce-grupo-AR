@@ -6,6 +6,15 @@ productmm <- function(M1, M2, N, memsize) {
   column <- 0
   index <- 1
   file_result <- "result_mv.csv"
+  
+  A3 <- read.csv(M1, header = FALSE,nrows=1)
+  Av3 <- read.csv(M2, header = FALSE,nrows = 1)
+  size_by_lineV <-object.size(Av3)
+  size_by_line3 <- object.size(A3)
+  memtotal<-size_by_lineV+size_by_line3
+  cant_elems <- memsize %/% size_by_line3 
+  
+  if(cant_elems>0&&memtotal<memsize){
   if (file.exists(file_result)) file.remove(file_result)
   while(N*N > column) {
    
@@ -34,5 +43,7 @@ productmm <- function(M1, M2, N, memsize) {
 
   
   
-  
+  }else{
+    print("No hay memoria disponible para procesar dichas matrices")
+  }
 }
